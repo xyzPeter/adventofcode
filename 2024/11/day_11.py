@@ -1,5 +1,6 @@
 import functools
 
+
 def main():
     # data_file = r".\2024\11\data_example.txt"
     data_file = r".\2024\11\data.txt"
@@ -24,9 +25,9 @@ def blink(rocks):
             rocks[i] = 1
         elif len(s_rock) % 2 == 0:
             # even number of rocks
-            r1 = s_rock[:len(s_rock)//2]
+            r1 = s_rock[: len(s_rock) // 2]
             rocks.insert(i, int(r1))
-            r2 = s_rock[len(s_rock)//2:]
+            r2 = s_rock[len(s_rock) // 2 :]
             i += 1
             rocks[i] = int(r2)
         else:
@@ -35,7 +36,7 @@ def blink(rocks):
 
 
 def part_1(lines):
-    result = 0 # number of rocks
+    result = 0  # number of rocks
 
     rocks = [int(x) for x in lines[0].split()]
 
@@ -50,27 +51,28 @@ def part_1(lines):
 
 @functools.cache
 def blink_2(rock, steps):
-    
+
     if steps <= 0:
-        return 1 # just one rock
+        return 1  # just one rock
 
     steps -= 1
-    
+
     if rock == 0:
         return blink_2(1, steps)
 
     s_rock = str(rock)
     if len(s_rock) % 2 == 0:
-        return blink_2(int(s_rock[:len(s_rock)//2]), steps) + blink_2(int(s_rock[len(s_rock)//2:]), steps)
+        return blink_2(int(s_rock[: len(s_rock) // 2]), steps) + blink_2(
+            int(s_rock[len(s_rock) // 2 :]), steps
+        )
 
-    return blink_2(rock*2024, steps)
-
+    return blink_2(rock * 2024, steps)
 
 
 def part_2(lines):
-    result = 0 # number of viable trails
+    result = 0  # number of viable trails
     i_rocks = [int(x) for x in lines[0].split()]
-    
+
     result = 0
     for rock in i_rocks:
         result += blink_2(rock, 75)
