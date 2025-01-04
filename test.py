@@ -4,6 +4,12 @@ from functools import cache
 def main():
     print("Hello from adventofcode!")
 
+    s = "abc\ndef\nghi"
+    g = convert_to_grid(s)
+    print(g[0][2])
+
+    exit()
+
     # Example usage
     coefficients = [
         [1, 1],
@@ -94,6 +100,20 @@ def solve(rock, steps):
         return solve(int(s_rock[:len(s_rock)//2]), steps) + solve(int(s_rock[len(s_rock)//2:]), steps)
 
     return solve(rock*2024, steps)
+
+
+def convert_to_grid(multiline):
+    """
+    Converts a multiline string into a grid (list of lists of characters).
+
+    Parameters:
+    - multiline (str): Split at \n.
+
+    Returns:
+    - grid (list of list of str): A 2D list where each character is a separate element.
+    """
+    grid = [list(r) for r in multiline.split("\n")]
+    return grid
 
 
 if __name__ == "__main__":
